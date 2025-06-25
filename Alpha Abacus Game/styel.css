@@ -1,0 +1,341 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap');
+
+:root {
+    --primary-bg: #e0f7fa; /* Light Blue */
+    --secondary-bg: #ffffff; /* White */
+    --accent-color-1: #4dd0e1; /* Cyan */
+    --accent-color-2: #ffab40; /* Orange */
+    --text-color-dark: #263238; /* Dark Grey */
+    --text-color-light: #eceff1; /* Light Grey */
+    --success-color: #69f0ae; /* Green */
+    --error-color: #ff5252; /* Red */
+    --button-bg: #00bcd4; /* Teal */
+    --button-hover: #00838f; /* Darker Teal */
+    --input-border: #b2ebf2; /* Lighter Teal */
+    --border-radius: 12px;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--primary-bg) 0%, var(--accent-color-1) 100%);
+    color: var(--text-color-dark);
+    box-sizing: border-box;
+}
+
+.game-container {
+    background-color: var(--secondary-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 30px 40px;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.game-title {
+    font-family: 'Press Start 2P', cursive; /* Retro game font */
+    color: var(--button-bg);
+    margin-bottom: 30px;
+    font-size: 2em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    position: relative;
+    animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.02); }
+}
+
+/* Section Management */
+.game-section {
+    display: none;
+    animation: slideIn 0.5s ease-out;
+}
+
+.game-section.active {
+    display: block;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.section-title {
+    color: var(--accent-color-2);
+    margin-bottom: 25px;
+    font-size: 1.8em;
+}
+
+/* Input Fields & Labels */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-color-dark);
+}
+
+input[type="text"],
+input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 2px solid var(--input-border);
+    border-radius: 8px;
+    font-size: 1.1em;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: var(--accent-color-2);
+    box-shadow: 0 0 8px rgba(255, 171, 64, 0.3);
+}
+
+/* Buttons */
+button {
+    background-color: var(--button-bg);
+    color: var(--text-color-light);
+    border: none;
+    padding: 14px 25px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    margin-top: 15px;
+    box-shadow: 0 4px 8px rgba(0, 188, 212, 0.2);
+}
+
+button:hover {
+    background-color: var(--button-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 188, 212, 0.3);
+}
+
+button:disabled {
+    background-color: #b0bec5;
+    cursor: not-allowed;
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Radio Button Groups */
+.setting-group {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    margin-bottom: 25px;
+    border: 1px solid var(--input-border);
+}
+
+.setting-group h3 {
+    color: var(--button-bg);
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.radio-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.radio-group input[type="radio"] {
+    display: none; /* Hide default radio button */
+}
+
+.radio-group label {
+    background-color: var(--accent-color-1);
+    color: var(--text-color-light);
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.radio-group input[type="radio"]:checked + label {
+    background-color: var(--accent-color-2); /* Highlight checked option */
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(255, 171, 64, 0.3);
+}
+
+/* Game Play Area Specifics */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--input-border);
+}
+
+.player-info, .score-info {
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+.score-info span {
+    color: var(--accent-color-2);
+}
+
+.round-info {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: var(--button-bg);
+    margin-bottom: 20px;
+}
+
+.display-area {
+    background-color: #e3f2fd; /* Lighter blue */
+    border: 2px solid var(--accent-color-1);
+    border-radius: var(--border-radius);
+    padding: 30px 20px;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    overflow: hidden; /* For timer bar */
+    position: relative;
+}
+
+.operation-text {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2.5em;
+    color: var(--text-color-dark);
+    margin: 0;
+    min-height: 40px; /* To prevent layout shift */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+.operation-text.animate {
+    animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.countdown-text {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--error-color);
+    margin-top: 15px;
+    animation: bounce 0.5s infinite alternate;
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-5px); }
+}
+
+.timer-bar-container {
+    width: 90%;
+    height: 10px;
+    background-color: #bbdefb;
+    border-radius: 5px;
+    margin-top: 20px;
+    overflow: hidden;
+    display: none; /* Hidden until timer starts */
+}
+
+.timer-bar {
+    height: 100%;
+    width: 100%;
+    background-color: var(--success-color);
+    border-radius: 5px;
+    transform-origin: left;
+    transition: width linear; /* Smooth transition for timer */
+}
+
+.answer-section {
+    margin-top: 20px;
+}
+
+.feedback-message {
+    font-size: 1.3em;
+    font-weight: 700;
+    margin-top: 20px;
+    padding: 10px 0;
+    border-radius: 8px;
+    min-height: 30px; /* Prevent layout shift */
+}
+
+.feedback-message.correct {
+    color: var(--success-color);
+    background-color: rgba(105, 240, 174, 0.15);
+}
+
+.feedback-message.incorrect {
+    color: var(--error-color);
+    background-color: rgba(255, 82, 82, 0.15);
+}
+
+/* Award Screen */
+.award-screen {
+    padding: 40px;
+    background: linear-gradient(45deg, #ffd700, #ffecb3); /* Gold gradient */
+    border: 5px solid #ffa000;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    animation: awardPop 0.8s ease-out forwards;
+}
+
+@keyframes awardPop {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.award-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2.5em;
+    color: #d4ac00; /* Darker gold */
+    margin-bottom: 20px;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+}
+
+.award-message {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #a0522d; /* Sienna */
+    margin-bottom: 15px;
+}
+
+.award-instruction {
+    font-size: 1.2em;
+    color: #8b4513; /* SaddleBrown */
+    margin-top: 20px;
+    font-style: italic;
+}
+
+/* Utility classes */
+.hidden {
+    display: none !important;
+}
